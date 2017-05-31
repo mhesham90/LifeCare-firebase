@@ -1,6 +1,4 @@
-import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
-import Pharmacy from '../models/pharmacy';
+import { pharmacyDAO } from '../index';
 import { Router } from 'express';
 
 const pharmacyRouter: Router = Router();
@@ -10,4 +8,3 @@ pharmacyRouter.get('/', function(req, res, next) {
 });
 
 export default pharmacyRouter;
-

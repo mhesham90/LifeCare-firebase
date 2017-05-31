@@ -1,20 +1,9 @@
-export default class Pharmacy{
-    uid: string;
-    name: string;
-    imageURL: string;
-    telephone: string;
-    loaction: any; // {long:'...', lat:'...'}
-    district: string;
-    delivery_areas: any; // fill array from snapshot
-    medicine: any;  // fill array with medicine
-    delivery_start_time: string;  //24 hr string
-    delivery_end_time: string;  //24 hr string
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class Pharmacy {
     constructor() {
-
     }
-
-    get(data: any){
+    get(data) {
         this.uid = data.uid;
         this.name = data.name;
         this.imageURL = data.imageURL;
@@ -26,3 +15,4 @@ export default class Pharmacy{
         this.delivery_end_time = data.delivery_end_time;
     }
 }
+exports.default = Pharmacy;

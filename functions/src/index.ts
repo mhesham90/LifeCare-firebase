@@ -8,10 +8,18 @@ const searchApp: express.Express = express();
 
 admin.initializeApp(functions.config().firebase);
 
+// export DAO classes
+import MedicineDAO from './DAO/medicine';
+import PharmacyDAO from './DAO/pharmacy';
+import DistrictDAO from './DAO/district';
+export const medicineDAO = new MedicineDAO();
+export const pharmacyDAO = new PharmacyDAO();
+export const districtDAO = new DistrictDAO();
+
 //...import controllers
 import PharmacyRouter from './controllers/pharmacyController';
-// import DistrictRouter from './controllers/districtController';
-// import MidicineRouter from './controllers/medicineController';
+import DistrictRouter from './controllers/districtController';
+import MidicineRouter from './controllers/medicineController';
 // import SearchRouter from './controllers/searchController';
 declare module 'express' {
   interface Request {
@@ -43,13 +51,12 @@ const authenticate = (req: express.Request, res: express.Response, next: express
 
 //...define routes
 pharmacyApp.use("/",PharmacyRouter);
-// medicineApp.use("/",MidicineRouter);
-// districtApp.use("/",DistrictRouter);
+medicineApp.use("/",MidicineRouter);
+districtApp.use("/",DistrictRouter);
 // searchApp.use("/",SearchRouter);
 
 
 export const pharmacy = functions.https.onRequest(pharmacyApp);
 export const medicine = functions.https.onRequest(medicineApp);
 export const district = functions.https.onRequest(districtApp);
-export const search = functions.https.onRequest(searchApp);
-
+// export const search = functions.https.onRequest(searchApp);

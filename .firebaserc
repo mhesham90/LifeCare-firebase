@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "life-care-app"
+    "default": "life-care-app",
+    "newlife": "life-care-app"
   }
 }
