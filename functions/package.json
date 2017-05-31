@@ -2,8 +2,18 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
+    "algoliasearch": "^3.22.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
     "firebase-admin": "~4.2.1",
-    "firebase-functions": "^0.5.7"
+    "firebase-functions": "^0.5.7",
+    "firebase-paginator": "^1.0.16",
+    "point-in-polygon": "^1.0.1",
+    "typescript": "^2.3.2"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "ts-loader": "^2.1.0",
+    "webpack-node-externals": "^1.6.0"
+  }
 }

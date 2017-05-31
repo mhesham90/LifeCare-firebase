@@ -1,8 +1,6 @@
 .idea
 **/node_modules/*
 /functions/index.js
-/functions/controllers/
-/functions/models/*
 /functions/.env
 /functions/firebase-debug.log
 
