@@ -9,12 +9,12 @@ const searchApp: express.Express = express();
 admin.initializeApp(functions.config().firebase);
 
 // export DAO classes
-import MedicineDAO from './DAO/medicine';
-import PharmacyDAO from './DAO/pharmacy';
-import DistrictDAO from './DAO/district';
-export const medicineDAO = new MedicineDAO();
-export const pharmacyDAO = new PharmacyDAO();
-export const districtDAO = new DistrictDAO();
+// import MedicineDAO from './DAO/medicine';
+// import PharmacyDAO from './DAO/pharmacy';
+// import DistrictDAO from './DAO/district';
+// export const medicineDAO = new MedicineDAO();
+// export const pharmacyDAO = new PharmacyDAO();
+// export const districtDAO = new DistrictDAO();
 
 //...import controllers
 import PharmacyRouter from './controllers/pharmacyController';

@@ -1,4 +1,4 @@
-import { districtDAO } from '../index';
+import { districtDAO } from '../DAO/district';
 import { Router } from 'express';
 
 const districtRouter: Router = Router();

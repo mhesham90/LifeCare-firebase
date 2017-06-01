@@ -22,4 +22,4 @@ class MedicineDAO extends abstract_1.AbstractDAO {
         });
     }
 }
-exports.default = MedicineDAO;
+exports.medicineDAO = new MedicineDAO();

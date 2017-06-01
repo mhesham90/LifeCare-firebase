@@ -2,7 +2,7 @@ import { AbstractDAO } from './abstract';
 import District from '../models/district';
 var inside = require('point-in-polygon');
 
-export default class DistrictDAO extends AbstractDAO{
+class DistrictDAO extends AbstractDAO{
 
     constructor() {
         super()
@@ -43,3 +43,5 @@ export default class DistrictDAO extends AbstractDAO{
     }
 
 }
+
+export const districtDAO = new DistrictDAO();

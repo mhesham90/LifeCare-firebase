@@ -1,7 +1,7 @@
 import { AbstractDAO } from './abstract';
 import Medicine from '../models/medicine';
 
-export default class MedicineDAO extends AbstractDAO{
+class MedicineDAO extends AbstractDAO{
 
   constructor() {
       super()
@@ -43,3 +43,5 @@ export default class MedicineDAO extends AbstractDAO{
   //   });
   // }
 }
+
+export const medicineDAO = new MedicineDAO();

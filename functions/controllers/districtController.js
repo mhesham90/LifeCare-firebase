@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = require("../index");
+const district_1 = require("../DAO/district");
 const express_1 = require("express");
 const districtRouter = express_1.Router();
 districtRouter.get('/', function (req, res, next) {
-    index_1.districtDAO.getAll()
+    district_1.districtDAO.getAll()
         .then((data) => {
         res.status(200).send(data);
     }).catch((error) => {
@@ -14,7 +14,7 @@ districtRouter.get('/', function (req, res, next) {
 districtRouter.get('/:long/:lat', function (req, res, next) {
     let long = Number(req.params.long);
     let lat = Number(req.params.lat);
-    index_1.districtDAO.getByCoords(long, lat)
+    district_1.districtDAO.getByCoords(long, lat)
         .then((district) => {
         res.status(200).send(district);
     }).catch(() => {

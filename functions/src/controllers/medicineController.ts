@@ -1,4 +1,4 @@
-import { medicineDAO } from '../index';
+import { medicineDAO } from '../DAO/medicine';
 import { Router } from 'express';
 
 const medicineRouter: Router = Router();

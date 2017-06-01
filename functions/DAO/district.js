@@ -39,4 +39,4 @@ class DistrictDAO extends abstract_1.AbstractDAO {
         return pointsList;
     }
 }
-exports.default = DistrictDAO;
+exports.districtDAO = new DistrictDAO();
