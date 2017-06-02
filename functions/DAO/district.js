@@ -10,7 +10,7 @@ class DistrictDAO extends abstract_1.AbstractDAO {
     }
     deserialize(data) {
         let district = new district_1.default();
-        district.get(data);
+        district.set(data);
         return district;
     }
     getByCoords(long, lat) {

@@ -1,7 +1,7 @@
 export default class Medicine{
   uid: string;
   name: string;
-  imageURL: string;
+  imageUrl: string;
   category: string;   //medicines or accessories
   type: string;       //pills, ..
   unit_no: number;
@@ -12,10 +12,10 @@ export default class Medicine{
 
   }
 
-  get(data: any){
+  set(data: any){
       this.uid = data.uid;
       this.name = data.name;
-      this.imageURL = data.imageURL;
+      this.imageUrl = data.imageUrl;
       this.category = data.category;
       this.type = data.type;
       this.unit_no = data.unit_no;

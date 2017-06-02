@@ -7,7 +7,7 @@ export default class District{
 
     }
 
-    get(data: any){
+    set(data: any){
         this.uid = data.uid;
         this.name = data.name;
         this.points = data.points;

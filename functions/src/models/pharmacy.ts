@@ -1,9 +1,9 @@
 export default class Pharmacy{
     uid: string;
     name: string;
-    imageURL: string;
+    imageUrl: string;
     telephone: string;
-    loaction: any; // {long:'...', lat:'...'}
+    location: any; // {long:'...', lat:'...'}
     district: string;
     delivery_areas: any; // fill array from snapshot
     medicine: any;  // fill array with medicine
@@ -14,12 +14,12 @@ export default class Pharmacy{
 
     }
 
-    get(data: any){
+    set(data: any){
         this.uid = data.uid;
         this.name = data.name;
-        this.imageURL = data.imageURL;
+        this.imageUrl = data.imageUrl;
         this.telephone = data.telephone;
-        this.loaction = data.loaction;
+        this.location = data.location;
         this.district = data.district;
         this.medicine = data.medicine;
         this.delivery_start_time = data.delivery_start_time;

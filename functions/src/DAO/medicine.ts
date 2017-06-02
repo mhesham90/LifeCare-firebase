@@ -10,7 +10,7 @@ class MedicineDAO extends AbstractDAO{
 
   deserialize(data: any){
       let medicine = new Medicine()
-      medicine.get(data)
+      medicine.set(data)
       return medicine
   }
 

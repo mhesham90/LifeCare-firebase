@@ -9,7 +9,7 @@ class MedicineDAO extends abstract_1.AbstractDAO {
     }
     deserialize(data) {
         let medicine = new medicine_1.default();
-        medicine.get(data);
+        medicine.set(data);
         return medicine;
     }
     searchByName(name) {

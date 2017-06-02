@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Medicine {
     constructor() {
     }
-    get(data) {
+    set(data) {
         this.uid = data.uid;
         this.name = data.name;
-        this.imageURL = data.imageURL;
+        this.imageUrl = data.imageUrl;
         this.category = data.category;
         this.type = data.type;
         this.unit_no = data.unit_no;

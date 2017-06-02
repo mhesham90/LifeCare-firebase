@@ -11,7 +11,7 @@ class DistrictDAO extends AbstractDAO{
 
     deserialize(data: any){
         let district = new District()
-        district.get(data)
+        district.set(data)
         return district
     }
 

@@ -5,6 +5,9 @@ class AbstractDAO {
     constructor() {
         this.db = new firebase_1.default();
     }
+    serialize(data) {
+        return Object.assign({}, data);
+    }
     getById(id) {
         let query = this.db.query({ path: '/' + this.entity + '/' + id });
         return new Promise((resolve, reject) => {
@@ -22,6 +25,18 @@ class AbstractDAO {
                 resolve(arr);
             }).catch((error) => { reject(error); });
         });
+    }
+    insertOne(ref, data) {
+        let d = this.serialize(data);
+        this.db.insertOne(ref, d);
+    }
+    insertMany(ref, objects) {
+        let data = objects.map(this.serialize);
+        this.db.insertMany(ref, data);
+    }
+    insertManyInOne(ref, objects) {
+        let data = objects.map(this.serialize);
+        this.db.insertManyInOne(ref, data);
     }
 }
 exports.AbstractDAO = AbstractDAO;

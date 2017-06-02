@@ -1,7 +1,8 @@
+import { ORMInterface } from './ORMInterface';
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 
-export default class FirebaseORM{
+export default class FirebaseORM implements ORMInterface{
     db: any
 
     constructor() {
@@ -74,6 +75,56 @@ export default class FirebaseORM{
               }
               resolve(result)
           }).catch((error: any) => reject(error))
+      })
+    }
+
+    // insertOne(ref: any, data: any){
+    //   var newKey = this.db.ref().child(ref).push().key;
+    //   let dataToInsert = {}
+    //   let uid = data.uid;
+    //   delete data['uid'];
+    //   dataToInsert[uid] = data;
+    //   this.db.ref(ref + '/' + newKey).set(dataToInsert);
+    // }
+
+    insertOne(ref: any, data: any){
+      if(data.uid){
+        let dataToInsert = {}
+        let key = data.uid
+        delete data['uid']
+        dataToInsert[key] = data
+        this.db.ref(ref + '/').update(dataToInsert);
+      }else{
+        this.db.ref(ref + '/').push(data);
+      }
+    }
+
+    insertMany(ref: any, data: any){
+      data.forEach((d: any) => {
+          if(d.uid){
+            let dataToInsert = {}
+            let key = d.uid
+            delete d['uid']
+            dataToInsert[key] = d
+            this.db.ref(ref + '/').update(dataToInsert)
+          }else{
+            this.db.ref(ref + '/').push(d);
+          }
+      })
+    }
+
+    insertManyInOne(ref: any, data: any){
+      let newKey = this.db.ref(ref + '/').push().key;
+      data.forEach((d: any) => {
+          if(d.uid){
+            let dataToInsert = {}
+            let key = d.uid
+            delete d['uid']
+            dataToInsert[key] = d
+            this.db.ref(ref + '/' + newKey).update(dataToInsert)
+          }else{
+            this.db.ref(ref + '/' + newKey).push(d);
+          }
       })
     }
 }

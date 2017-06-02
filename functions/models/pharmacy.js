@@ -3,12 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Pharmacy {
     constructor() {
     }
-    get(data) {
+    set(data) {
         this.uid = data.uid;
         this.name = data.name;
-        this.imageURL = data.imageURL;
+        this.imageUrl = data.imageUrl;
         this.telephone = data.telephone;
-        this.loaction = data.loaction;
+        this.location = data.location;
         this.district = data.district;
         this.medicine = data.medicine;
         this.delivery_start_time = data.delivery_start_time;
