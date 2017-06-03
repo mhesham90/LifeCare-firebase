@@ -94,8 +94,9 @@ export default class FirebaseORM implements ORMInterface{
         delete data['uid']
         dataToInsert[key] = data
         this.db.ref(ref + '/').update(dataToInsert);
+        return key;
       }else{
-        this.db.ref(ref + '/').push(data);
+        return this.db.ref(ref + '/').push(data).key;
       }
     }
 
@@ -113,8 +114,10 @@ export default class FirebaseORM implements ORMInterface{
       })
     }
 
-    insertManyInOne(ref: any, data: any){
-      let newKey = this.db.ref(ref + '/').push().key;
+    insertManyInOne(ref: any, data: any, newKey?: any){
+      if (!newKey){
+          newKey = this.db.ref(ref + '/').push().key;
+      }
       data.forEach((d: any) => {
           if(d.uid){
             let dataToInsert = {}

@@ -43,7 +43,7 @@ export abstract class AbstractDAO{
     insertOne(ref: any, data: any){
         //convert to JS object
         let d = this.serialize(data)
-        this.db.insertOne(ref, d);
+        return this.db.insertOne(ref, d);
     }
 
     //insert array of objects of models
@@ -54,9 +54,9 @@ export abstract class AbstractDAO{
     }
 
     //insert array of objects of models in One new key
-    insertManyInOne(ref: any, objects: any){
+    insertManyInOne(ref: any, objects: any, newKey?: any){
         //convert to JS objects
         let data = objects.map(this.serialize)
-        this.db.insertManyInOne(ref, data);
+        this.db.insertManyInOne(ref, data, newKey);
     }
 }
