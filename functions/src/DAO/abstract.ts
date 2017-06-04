@@ -40,23 +40,23 @@ export abstract class AbstractDAO{
     }
 
     // insert one object of model
-    insertOne(ref: any, data: any){
+    insertOne(data: any, ref: any = ''){
         //convert to JS object
         let d = this.serialize(data)
-        this.db.insertOne(ref, d);
+        return this.db.insertOne(d, this.entity + ref);
     }
 
     //insert array of objects of models
-    insertMany(ref: any, objects: any){
+    insertMany(objects: any, ref: any = ''){
         //convert to JS objects
         let data = objects.map(this.serialize)
-        this.db.insertMany(ref, data);
+        this.db.insertMany(data, this.entity + ref);
     }
 
     //insert array of objects of models in One new key
-    insertManyInOne(ref: any, objects: any){
+    insertManyInOne(objects: any, ref: any = ''){
         //convert to JS objects
         let data = objects.map(this.serialize)
-        this.db.insertManyInOne(ref, data);
+        this.db.insertManyInOne(data, this.entity + ref);
     }
 }

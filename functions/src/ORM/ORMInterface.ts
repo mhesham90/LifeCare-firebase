@@ -6,9 +6,9 @@ export interface ORMInterface{
 
     executeOne(query: any): any;
 
-    insertOne(ref: any, data: any): any;
+    insertOne(data: any, ref: any): any;
 
-    insertMany(ref: any, data: any): any;
+    insertMany(data: any, ref: any): any;
 
-    insertManyInOne(ref: any, data: any): any;
+    insertManyInOne(data: any, ref: any): any;
 }

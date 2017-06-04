@@ -68,19 +68,20 @@ class FirebaseORM {
             }).catch((error) => reject(error));
         });
     }
-    insertOne(ref, data) {
+    insertOne(data, ref) {
         if (data.uid) {
             let dataToInsert = {};
             let key = data.uid;
             delete data['uid'];
             dataToInsert[key] = data;
             this.db.ref(ref + '/').update(dataToInsert);
+            return key;
         }
         else {
-            this.db.ref(ref + '/').push(data);
+            return this.db.ref(ref + '/').push(data).key;
         }
     }
-    insertMany(ref, data) {
+    insertMany(data, ref) {
         data.forEach((d) => {
             if (d.uid) {
                 let dataToInsert = {};
@@ -94,7 +95,7 @@ class FirebaseORM {
             }
         });
     }
-    insertManyInOne(ref, data) {
+    insertManyInOne(data, ref) {
         let newKey = this.db.ref(ref + '/').push().key;
         data.forEach((d) => {
             if (d.uid) {

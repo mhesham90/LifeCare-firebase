@@ -8,18 +8,11 @@ const searchApp: express.Express = express();
 
 admin.initializeApp(functions.config().firebase);
 
-// export DAO classes
-// import MedicineDAO from './DAO/medicine';
-// import PharmacyDAO from './DAO/pharmacy';
-// import DistrictDAO from './DAO/district';
-// export const medicineDAO = new MedicineDAO();
-// export const pharmacyDAO = new PharmacyDAO();
-// export const districtDAO = new DistrictDAO();
-
 //...import controllers
 import PharmacyRouter from './controllers/pharmacyController';
 import DistrictRouter from './controllers/districtController';
 import MidicineRouter from './controllers/medicineController';
+import * as listeners from './controllers/dbListener';
 // import SearchRouter from './controllers/searchController';
 declare module 'express' {
   interface Request {
@@ -59,4 +52,5 @@ districtApp.use("/",DistrictRouter);
 export const pharmacy = functions.https.onRequest(pharmacyApp);
 export const medicine = functions.https.onRequest(medicineApp);
 export const district = functions.https.onRequest(districtApp);
+export const resultListener = functions.database.ref('result/{id}/timestamp').onWrite(listeners.resultListener);
 // export const search = functions.https.onRequest(searchApp);

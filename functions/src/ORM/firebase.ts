@@ -78,28 +78,20 @@ export default class FirebaseORM implements ORMInterface{
       })
     }
 
-    // insertOne(ref: any, data: any){
-    //   var newKey = this.db.ref().child(ref).push().key;
-    //   let dataToInsert = {}
-    //   let uid = data.uid;
-    //   delete data['uid'];
-    //   dataToInsert[uid] = data;
-    //   this.db.ref(ref + '/' + newKey).set(dataToInsert);
-    // }
-
-    insertOne(ref: any, data: any){
+    insertOne(data: any, ref: any){
       if(data.uid){
         let dataToInsert = {}
         let key = data.uid
         delete data['uid']
         dataToInsert[key] = data
         this.db.ref(ref + '/').update(dataToInsert);
+        return key;
       }else{
-        this.db.ref(ref + '/').push(data);
+        return this.db.ref(ref + '/').push(data).key;
       }
     }
 
-    insertMany(ref: any, data: any){
+    insertMany(data: any, ref: any){
       data.forEach((d: any) => {
           if(d.uid){
             let dataToInsert = {}
@@ -113,7 +105,7 @@ export default class FirebaseORM implements ORMInterface{
       })
     }
 
-    insertManyInOne(ref: any, data: any){
+    insertManyInOne(data: any, ref: any){
       let newKey = this.db.ref(ref + '/').push().key;
       data.forEach((d: any) => {
           if(d.uid){

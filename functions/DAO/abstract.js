@@ -26,17 +26,17 @@ class AbstractDAO {
             }).catch((error) => { reject(error); });
         });
     }
-    insertOne(ref, data) {
+    insertOne(data, ref = '') {
         let d = this.serialize(data);
-        this.db.insertOne(ref, d);
+        return this.db.insertOne(d, this.entity + ref);
     }
-    insertMany(ref, objects) {
+    insertMany(objects, ref = '') {
         let data = objects.map(this.serialize);
-        this.db.insertMany(ref, data);
+        this.db.insertMany(data, this.entity + ref);
     }
-    insertManyInOne(ref, objects) {
+    insertManyInOne(objects, ref = '') {
         let data = objects.map(this.serialize);
-        this.db.insertManyInOne(ref, data);
+        this.db.insertManyInOne(data, this.entity + ref);
     }
 }
 exports.AbstractDAO = AbstractDAO;
