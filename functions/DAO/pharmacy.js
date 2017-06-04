@@ -12,7 +12,7 @@ class PharmacyDAO extends abstract_1.AbstractDAO {
         pharmacy.set(data);
         return pharmacy;
     }
-    getByMedicineAndDistrict(id, district, quantity) {
+    getByMedicineAndDistrict(id, district, quantity = 5) {
         let query = this.db.query({ path: '/medicine/' + id + '/pharmacies' });
         let pharmacies = [];
         return new Promise((resolve, reject) => {
@@ -41,4 +41,5 @@ class PharmacyDAO extends abstract_1.AbstractDAO {
         return result;
     }
 }
+exports.PharmacyDAO = PharmacyDAO;
 exports.pharmacyDAO = new PharmacyDAO();

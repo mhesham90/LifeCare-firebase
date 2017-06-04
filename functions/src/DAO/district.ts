@@ -21,14 +21,14 @@ class DistrictDAO extends AbstractDAO{
           return new Promise((resolve, reject) =>{
               districts.forEach((dist: any) => {
                   let pointsList = this.getPointsList(dist)
-                  console.log(pointsList)
-                  console.log(inside([ long, lat ], pointsList))
                   if(inside([ long, lat ], pointsList)){
                       resolve(dist);
                   }
               })
               resolve(new District());
           })
+        }).catch((err) =>{
+          return Promise.reject(err)
         })
     }
 
@@ -40,6 +40,26 @@ class DistrictDAO extends AbstractDAO{
             pointsList.push(myPoints.slice(i,i+2));
         pointsList = pointsList.map((arr: any) => arr.map(Number))
         return pointsList;
+    }
+
+    findDistrict(district_id: any, gpslong: any, gpslat: any){
+        return new Promise((resolve, reject) => {
+            if(district_id !== "" && district_id !== undefined){
+              this.getById(district_id)
+                .then((dis: any) => {
+                    resolve(dis.uid)
+                }).catch((err:any) =>{
+                  reject(err)
+                })
+            }else{
+              this.getByCoords(gpslong, gpslat)
+                .then((dis: any) => {
+                    resolve(dis.uid);
+                }).catch((err:any) =>{
+                  reject(err)
+                })
+            }
+        })
     }
 
 }

@@ -21,29 +21,31 @@ pharmacyRouter.get('/medicine/:id', function(req, res, next) {
   // case 2 .. to paginate
   let searchkey = req.query.searchkey;
   let lastkey = req.query.lastkey;
+  ////////////////////////////////////
+  if(searchkey && lastkey){
 
-  let getDistrict = new Promise((resolve, reject) => {
-      if(district_id !== "" && district_id !== undefined){
-          resolve(district_id)
-      }else{
-        districtDAO.getByCoords(gpslong, gpslat)
-          .then((dis: any) => {
-              resolve(dis.uid);
-          })
-      }
-  })
-  getDistrict.then((dist_id) => {
-      if(!dist_id){
-        res.status(404).send("Not found district")
-      }else{
-        pharmacyDAO.getByMedicineAndDistrict(medicine_id, dist_id, 5).then((data) =>{
-          pharmacyDAO.insertManyInOne('result', data)
-          res.status(200).send(data)
-        }).catch((err) =>{
-          res.status(503).send(err)
-        })
-      }
-  })
+  }else if(district_id || (gpslong && gpslat)){
+      districtDAO.findDistrict(district_id, gpslong, gpslat)
+      .then((dist_id) => {
+            if(!dist_id){
+              res.status(404).send("Not found district")
+            }else{
+              pharmacyDAO.getByMedicineAndDistrict(medicine_id, dist_id)
+              .then((data) =>{
+                  // insert temp results
+                  //get first {limit} elements
+                  res.status(200).send(data)
+              }).catch((err) =>{
+                  res.status(503).send("get By Medicine And District :" +err)
+              })
+            }
+      }).catch((err: any) => {
+        res.status(503).send("get district error: "+err)
+      })
+  }else{
+      res.status(404).send("query params error")
+  }
 });
+
 
 export default pharmacyRouter;

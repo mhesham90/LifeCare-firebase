@@ -1,7 +1,7 @@
 import { AbstractDAO } from './abstract';
 import Pharmacy from '../models/pharmacy';
 
-class PharmacyDAO extends AbstractDAO{
+export class PharmacyDAO extends AbstractDAO{
 
   constructor() {
       super()
@@ -15,7 +15,7 @@ class PharmacyDAO extends AbstractDAO{
   }
 
   //return JS objects NOT model objects
-  getByMedicineAndDistrict(id: any, district: any, quantity: number){
+  getByMedicineAndDistrict(id: any, district: any, quantity: number = 5){
       let query = this.db.query({path:'/medicine/'+id+'/pharmacies'})
       let pharmacies: any = [];
       return new Promise((resolve, reject)=>{
