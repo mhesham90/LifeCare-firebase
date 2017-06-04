@@ -9,6 +9,7 @@ export default class Pharmacy{
     medicine: any;  // fill array with medicine
     delivery_start_time: string;  //24 hr string
     delivery_end_time: string;  //24 hr string
+    deliverabilty: boolean;
 
     constructor() {
 
@@ -21,6 +22,7 @@ export default class Pharmacy{
         this.telephone = data.telephone;
         this.location = data.location;
         this.district = data.district;
+        this.delivery_areas = data.delivery_areas;
         this.medicine = data.medicine;
         this.delivery_start_time = data.delivery_start_time;
         this.delivery_end_time = data.delivery_end_time;

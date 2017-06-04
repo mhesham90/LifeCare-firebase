@@ -119,4 +119,8 @@ export default class FirebaseORM implements ORMInterface{
           }
       })
     }
+
+    remove(id: any, ref: any){
+        this.db.ref(ref).child(id).remove();
+    }
 }

@@ -38,5 +38,8 @@ class AbstractDAO {
         let data = objects.map(this.serialize);
         this.db.insertManyInOne(data, this.entity + ref);
     }
+    remove(id, ref = '') {
+        this.db.remove(id, this.entity + ref);
+    }
 }
 exports.AbstractDAO = AbstractDAO;

@@ -13,9 +13,10 @@ pharmacyRouter.get('/medicine/:id', function (req, res, next) {
     let limit = Number(req.query.limit) || 10;
     let searchkey = req.query.searchkey;
     let lastkey = req.query.lastkey;
+    let current_district;
     var nextPharKeys = new Promise(() => { });
     if (searchkey && lastkey) {
-        nextPharKeys = result_1.resultDAO.getSome(searchkey, lastkey, limit);
+        nextPharKeys = result_1.resultDAO.getNextKeys(searchkey, lastkey, limit);
     }
     else if (district_id || (gpslong && gpslat)) {
         nextPharKeys = new Promise((resolve, reject) => {
@@ -25,6 +26,7 @@ pharmacyRouter.get('/medicine/:id', function (req, res, next) {
                     res.status(404).send("Not found district");
                 }
                 else {
+                    current_district = dist_id;
                     pharmacy_1.pharmacyDAO.getByMedicineAndDistrict(medicine_id, dist_id, 5).then((data) => {
                         let now = Date.now();
                         searchkey = result_1.resultDAO.insertOne({ timestamp: now });
@@ -48,9 +50,11 @@ pharmacyRouter.get('/medicine/:id', function (req, res, next) {
         let pharmacies = [];
         Promise.all(resArray).then((phars) => {
             for (let key in phars) {
-                pharmacies.push({ 'pharmacy': phars[key], 'delivery': pharkeys[key]['delivery'] });
+                let p = phars[key];
+                p.deliverabilty = pharkeys[key]['delivery'];
+                pharmacies.push(p);
             }
-            res.status(200).send({ pharmacies: pharmacies, searchkey: searchkey });
+            res.status(200).send({ pharmacies: pharmacies, district: current_district, searchkey: searchkey });
         }).catch((err) => {
             res.status(503).send(err);
         });

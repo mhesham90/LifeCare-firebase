@@ -4,7 +4,7 @@ import FirebaseORM from '../ORM/firebase'
 // import MysqlORM from '../ORM/mysql'
 
 export abstract class AbstractDAO{
-    public db: ORMInterface;
+    protected db: ORMInterface;
     public entity: string;
 
     constructor() {
@@ -58,5 +58,9 @@ export abstract class AbstractDAO{
         //convert to JS objects
         let data = objects.map(this.serialize)
         this.db.insertManyInOne(data, this.entity + ref);
+    }
+
+    remove(id: any, ref: any = ''){
+        this.db.remove(id, this.entity + ref)
     }
 }

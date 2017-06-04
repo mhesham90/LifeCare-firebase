@@ -8,12 +8,12 @@ class ResultDAO extends abstract_1.AbstractDAO {
     }
     deserialize(data) {
     }
-    getSome(searchkey, lastkey, limit) {
+    getNextKeys(searchkey, lastkey, limit) {
         let cursorQuery = this.db.query({ path: this.entity + '/' + searchkey + '/data', where: 'id', equal: lastkey });
         return new Promise((resolve, reject) => {
             this.db.executeOne(cursorQuery)
                 .then((data) => {
-                if (!data) {
+                if (Object.keys(data).length === 0) {
                     reject('search key or last key not found');
                 }
                 delete (data['uid']);
@@ -25,6 +25,17 @@ class ResultDAO extends abstract_1.AbstractDAO {
                     resolve(keys);
                 }).catch((error) => { reject('keys error'); });
             }).catch((error) => { reject('cursor error'); });
+        });
+    }
+    removeExpired(min = 15) {
+        let now = Date.now();
+        let cutoff = now - min * 60 * 1000;
+        let query = this.db.query({ path: 'result/', where: 'timestamp', end: cutoff });
+        this.db.executeAll(query).then((snapshots) => {
+            snapshots.forEach((result) => {
+                console.log(result);
+                this.remove(result.uid);
+            });
         });
     }
 }

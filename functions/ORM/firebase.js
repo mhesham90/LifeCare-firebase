@@ -110,5 +110,8 @@ class FirebaseORM {
             }
         });
     }
+    remove(id, ref) {
+        this.db.ref(ref).child(id).remove();
+    }
 }
 exports.default = FirebaseORM;

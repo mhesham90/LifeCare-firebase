@@ -11,4 +11,6 @@ export interface ORMInterface{
     insertMany(data: any, ref: any): any;
 
     insertManyInOne(data: any, ref: any): any;
+
+    remove(id: any, ref: any): any;
 }
